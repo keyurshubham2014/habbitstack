@@ -1,122 +1,284 @@
 import 'package:flutter/material.dart';
+import 'theme/app_theme.dart';
+import 'theme/app_text_styles.dart';
+import 'theme/app_colors.dart';
+import 'widgets/buttons/primary_button.dart';
+import 'widgets/buttons/secondary_button.dart';
+import 'widgets/cards/base_card.dart';
+import 'widgets/inputs/text_input_field.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const StackHabitApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class StackHabitApp extends StatelessWidget {
+  const StackHabitApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'StackHabit',
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light,
+      debugShowCheckedModeBanner: false,
+      home: const DesignSystemTestScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class DesignSystemTestScreen extends StatelessWidget {
+  const DesignSystemTestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text('StackHabit - Design System'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Typography Section
+            Text('Typography', style: AppTextStyles.headline()),
+            SizedBox(height: 16),
+
+            BaseCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Headline - Poppins Bold 28px',
+                    style: AppTextStyles.headline()),
+                  SizedBox(height: 8),
+                  Text('Title - Poppins SemiBold 20px',
+                    style: AppTextStyles.title()),
+                  SizedBox(height: 8),
+                  Text('Body - Poppins Regular 16px',
+                    style: AppTextStyles.body()),
+                  SizedBox(height: 8),
+                  Text('Caption - Poppins Regular 14px',
+                    style: AppTextStyles.caption()),
+                  SizedBox(height: 8),
+                  Text('Small - Poppins Regular 12px',
+                    style: AppTextStyles.small()),
+                ],
+              ),
             ),
+
+            SizedBox(height: 32),
+
+            // Colors Section
+            Text('Color Palette', style: AppTextStyles.headline()),
+            SizedBox(height: 16),
+
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                _ColorSwatch('Warm Coral', AppColors.warmCoral),
+                _ColorSwatch('Gentle Teal', AppColors.gentleTeal),
+                _ColorSwatch('Deep Blue', AppColors.deepBlue),
+                _ColorSwatch('Success Green', AppColors.successGreen),
+                _ColorSwatch('Warning Amber', AppColors.warningAmber),
+                _ColorSwatch('Soft Red', AppColors.softRed),
+              ],
+            ),
+
+            SizedBox(height: 32),
+
+            // Buttons Section
+            Text('Buttons', style: AppTextStyles.headline()),
+            SizedBox(height: 16),
+
+            BaseCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  PrimaryButton(
+                    text: 'Primary Button',
+                    onPressed: () {},
+                  ),
+                  SizedBox(height: 12),
+                  PrimaryButton(
+                    text: 'With Icon',
+                    icon: Icons.add,
+                    onPressed: () {},
+                  ),
+                  SizedBox(height: 12),
+                  PrimaryButton(
+                    text: 'Loading',
+                    isLoading: true,
+                  ),
+                  SizedBox(height: 12),
+                  SecondaryButton(
+                    text: 'Secondary Button',
+                    onPressed: () {},
+                  ),
+                  SizedBox(height: 12),
+                  SecondaryButton(
+                    text: 'With Icon',
+                    icon: Icons.link,
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 32),
+
+            // Cards Section
+            Text('Cards', style: AppTextStyles.headline()),
+            SizedBox(height: 16),
+
+            BaseCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Elevated Card', style: AppTextStyles.title()),
+                  SizedBox(height: 8),
+                  Text('This is a base card component with elevation.',
+                    style: AppTextStyles.body()),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 12),
+
+            BaseCard(
+              elevated: false,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Flat Card', style: AppTextStyles.title()),
+                  SizedBox(height: 8),
+                  Text('This is a flat card without elevation.',
+                    style: AppTextStyles.body()),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 12),
+
+            BaseCard(
+              backgroundColor: AppColors.secondaryBg,
+              onTap: () {},
+              child: Row(
+                children: [
+                  Icon(Icons.touch_app, color: AppColors.warmCoral),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Tappable Card', style: AppTextStyles.title()),
+                        Text('Tap me!', style: AppTextStyles.caption()),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios,
+                    size: 16, color: AppColors.neutralGray),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 32),
+
+            // Input Fields Section
+            Text('Input Fields', style: AppTextStyles.headline()),
+            SizedBox(height: 16),
+
+            BaseCard(
+              child: Column(
+                children: [
+                  TextInputField(
+                    label: 'Habit Name',
+                    hint: 'Enter your habit name',
+                  ),
+                  SizedBox(height: 16),
+                  TextInputField(
+                    label: 'Notes',
+                    hint: 'Add some notes...',
+                    maxLines: 3,
+                  ),
+                  SizedBox(height: 16),
+                  TextInputField(
+                    label: 'Password',
+                    hint: 'Enter password',
+                    obscureText: true,
+                    suffixIcon: Icon(Icons.visibility_off),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 32),
+
+            // Bottom message
+            Center(
+              child: Column(
+                children: [
+                  Icon(Icons.check_circle,
+                    color: AppColors.successGreen, size: 48),
+                  SizedBox(height: 16),
+                  Text('Design System Ready!',
+                    style: AppTextStyles.title(color: AppColors.successGreen)),
+                  SizedBox(height: 8),
+                  Text('All components are working perfectly',
+                    style: AppTextStyles.caption()),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 32),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class _ColorSwatch extends StatelessWidget {
+  final String name;
+  final Color color;
+
+  const _ColorSwatch(this.name, this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      child: Column(
+        children: [
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            name,
+            style: AppTextStyles.small(),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+          ),
+        ],
+      ),
     );
   }
 }
