@@ -13,10 +13,10 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 ## Quick Stats
 
 - **Total Tasks**: 25
-- **Completed**: 2 ✅
+- **Completed**: 3 ✅
 - **In Progress**: 0
 - **Blocked**: 0
-- **Not Started**: 23
+- **Not Started**: 22
 
 ---
 
@@ -24,13 +24,13 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 
 ### Week 1-2: Project Setup
 **Status**: IN PROGRESS
-**Progress**: 2/5 tasks complete (40%)
+**Progress**: 3/5 tasks complete (60%)
 
 | Task File | Description | Status | Priority |
 |-----------|-------------|--------|----------|
 | `01_project_initialization.md` | Initialize Flutter project with dependencies | ✅ DONE | HIGH |
 | `02_design_system_setup.md` | Create theme, colors, typography | ✅ DONE | HIGH |
-| `03_database_schema.md` | Set up SQLite with schema | TODO | HIGH |
+| `03_database_schema.md` | Set up SQLite with schema | ✅ DONE | HIGH |
 | `04_bottom_navigation.md` | Implement main navigation structure | TODO | HIGH |
 | `05_state_management.md` | Set up Riverpod providers | TODO | HIGH |
 
@@ -98,10 +98,10 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 **Goal**: Complete project foundation and design system
 
 #### Must Complete:
-1. [ ] Initialize Flutter project with folder structure
-2. [ ] Set up all dependencies in pubspec.yaml
-3. [ ] Create design system (colors, typography, theme)
-4. [ ] Set up SQLite database with core schema
+1. [x] Initialize Flutter project with folder structure
+2. [x] Set up all dependencies in pubspec.yaml
+3. [x] Create design system (colors, typography, theme)
+4. [x] Set up SQLite database with core schema
 5. [ ] Implement bottom navigation with 5 tabs
 
 #### Nice to Have:
