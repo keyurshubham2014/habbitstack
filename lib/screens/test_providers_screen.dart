@@ -115,15 +115,36 @@ class TestProvidersScreen extends ConsumerWidget {
                     PrimaryButton(
                       text: 'Add Sample Habit',
                       onPressed: () async {
-                        final user = await ref.read(currentUserProvider.future);
-                        if (user != null) {
-                          final newHabit = Habit(
-                            userId: user.id!,
-                            name: 'Sample Habit ${habits.length + 1}',
-                            isAnchor: habits.length % 2 == 0,
-                            createdAt: DateTime.now(),
-                          );
-                          ref.read(habitsNotifierProvider.notifier).addHabit(newHabit);
+                        try {
+                          final user = await ref.read(currentUserProvider.future);
+                          if (user != null) {
+                            final newHabit = Habit(
+                              userId: user.id!,
+                              name: 'Sample Habit ${habits.length + 1}',
+                              isAnchor: habits.length % 2 == 0,
+                              createdAt: DateTime.now(),
+                            );
+                            await ref.read(habitsNotifierProvider.notifier).addHabit(newHabit);
+
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Habit added successfully!'),
+                                  backgroundColor: AppColors.successGreen,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Error: $e'),
+                                backgroundColor: AppColors.softRed,
+                              ),
+                            );
+                          }
                         }
                       },
                     ),
@@ -171,19 +192,47 @@ class TestProvidersScreen extends ConsumerWidget {
                     PrimaryButton(
                       text: 'Add Sample Log',
                       onPressed: () async {
-                        final user = await ref.read(currentUserProvider.future);
-                        final habits = await ref.read(habitsProvider.future);
+                        try {
+                          final user = await ref.read(currentUserProvider.future);
+                          final habits = await ref.read(habitsProvider.future);
 
-                        if (user != null && habits.isNotEmpty) {
-                          final newLog = DailyLog(
-                            userId: user.id!,
-                            habitId: habits.first.id!,
-                            completedAt: DateTime.now(),
-                            notes: 'Sample log entry',
-                            sentiment: 'happy',
-                            createdAt: DateTime.now(),
-                          );
-                          ref.read(logsNotifierProvider.notifier).addLog(newLog);
+                          if (user != null && habits.isNotEmpty) {
+                            final newLog = DailyLog(
+                              userId: user.id!,
+                              habitId: habits.first.id!,
+                              completedAt: DateTime.now(),
+                              notes: 'Sample log entry',
+                              sentiment: 'happy',
+                              createdAt: DateTime.now(),
+                            );
+                            await ref.read(logsNotifierProvider.notifier).addLog(newLog);
+
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Log added successfully!'),
+                                  backgroundColor: AppColors.successGreen,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          } else if (habits.isEmpty && context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Please add a habit first!'),
+                                backgroundColor: AppColors.warningAmber,
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Error: $e'),
+                                backgroundColor: AppColors.softRed,
+                              ),
+                            );
+                          }
                         }
                       },
                     ),
