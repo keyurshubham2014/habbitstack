@@ -2,43 +2,47 @@
 
 > Build sustainable habits through science-backed methods and AI-powered insights
 
-## 🚨 Current Status: Flutter Installation Required
+## ✅ Current Status: Ready to Develop!
 
-This project is ready to go, but **Flutter is not yet installed** on your system.
+Flutter is installed and the project is fully set up!
 
 ### Quick Start
 
-**1. Install Flutter**
-
-Choose one of these methods:
+**Run the App**
 
 ```bash
-# Option A: Via Homebrew (Recommended)
-brew install --cask flutter
-flutter doctor
+# Option 1: Interactive menu (recommended for beginners)
+./run.sh
 
-# Option B: Manual installation
-# See SETUP_FLUTTER.md for detailed instructions
-```
-
-**2. Run the Setup Script**
-
-```bash
-cd /Users/keyur/Documents/Projects/Sample-flutter-app
-./setup_project.sh
-```
-
-This will:
-- Create the Flutter project structure
-- Install all dependencies
-- Set up the folder structure
-- Create base theme files
-
-**3. Run the App**
-
-```bash
+# Option 2: Direct run (fastest)
 flutter run
+
+# Option 3: Quick reference
+cat QUICK_RUN.md
 ```
+
+### Running on Different Platforms
+
+```bash
+# Android Emulator (default)
+flutter run
+
+# Chrome (fastest for UI testing)
+flutter run -d chrome
+
+# macOS Desktop
+flutter run -d macos
+
+# iOS Simulator (if Xcode is installed)
+flutter run -d ios
+```
+
+### Hot Reload ⚡
+
+While the app is running, press:
+- **`r`** - Hot reload (instant updates!)
+- **`R`** - Hot restart
+- **`q`** - Quit app
 
 ### Alternative: Manual Setup
 
