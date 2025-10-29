@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_text_styles.dart';
 import '../../theme/app_colors.dart';
+import '../test_providers_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -39,6 +40,18 @@ class SettingsScreen extends StatelessWidget {
             title: Text('Upgrade to Premium', style: AppTextStyles.body()),
             trailing: Icon(Icons.chevron_right),
             onTap: () {},
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.science, color: AppColors.gentleTeal),
+            title: Text('Test Providers (Dev)', style: AppTextStyles.body()),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TestProvidersScreen()),
+              );
+            },
           ),
         ],
       ),

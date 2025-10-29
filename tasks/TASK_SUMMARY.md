@@ -13,18 +13,18 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 ## Quick Stats
 
 - **Total Tasks**: 25
-- **Completed**: 4 ✅
+- **Completed**: 5 ✅
 - **In Progress**: 0
 - **Blocked**: 0
-- **Not Started**: 21
+- **Not Started**: 20
 
 ---
 
 ## Phase 1: MVP (Weeks 1-6)
 
 ### Week 1-2: Project Setup
-**Status**: IN PROGRESS
-**Progress**: 4/5 tasks complete (80%)
+**Status**: COMPLETE ✅
+**Progress**: 5/5 tasks complete (100%)
 
 | Task File | Description | Status | Priority |
 |-----------|-------------|--------|----------|
@@ -32,7 +32,7 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 | `02_design_system_setup.md` | Create theme, colors, typography | ✅ DONE | HIGH |
 | `03_database_schema.md` | Set up SQLite with schema | ✅ DONE | HIGH |
 | `04_bottom_navigation.md` | Implement main navigation structure | ✅ DONE | HIGH |
-| `05_state_management.md` | Set up Riverpod providers | TODO | HIGH |
+| `05_state_management.md` | Set up Riverpod providers | ✅ DONE | HIGH |
 
 ### Week 3-4: Core Features
 **Status**: NOT STARTED
@@ -95,7 +95,7 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 ## Current Sprint Focus
 
 ### This Week (Week 1-2)
-**Goal**: Complete project foundation and design system
+**Goal**: Complete project foundation and design system ✅
 
 #### Must Complete:
 1. [x] Initialize Flutter project with folder structure
@@ -103,9 +103,13 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 3. [x] Create design system (colors, typography, theme)
 4. [x] Set up SQLite database with core schema
 5. [x] Implement bottom navigation with 5 tabs
+6. [x] Set up Riverpod state management
 
 #### Nice to Have:
 - [x] Create placeholder screens for all tabs
+- [x] Create models for Habit and DailyLog
+- [x] Create services for Habits and Logs
+- [x] Create test screen for providers
 - [ ] Add basic animations to navigation
 - [ ] Set up CI/CD pipeline (GitHub Actions)
 

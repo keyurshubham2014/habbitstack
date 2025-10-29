@@ -1,9 +1,9 @@
 # Task 05: State Management Setup (Riverpod)
 
-**Status**: TODO
+**Status**: DONE
 **Priority**: HIGH
 **Estimated Time**: 3 hours
-**Assigned To**: TBD
+**Assigned To**: Claude Code
 **Dependencies**: Task 01, Task 03
 
 ---
@@ -14,12 +14,12 @@ Set up Riverpod for state management across the app with providers for habits, l
 
 ## Acceptance Criteria
 
-- [ ] Riverpod properly configured in the app
-- [ ] User provider created and working
-- [ ] Habits provider with CRUD operations
-- [ ] Logs provider with CRUD operations
-- [ ] Streaks provider with calculation logic
-- [ ] Providers properly tested and functional
+- [x] Riverpod properly configured in the app
+- [x] User provider created and working
+- [x] Habits provider with CRUD operations
+- [x] Logs provider with CRUD operations
+- [x] Streaks provider with calculation logic
+- [x] Providers properly tested and functional
 
 ---
 

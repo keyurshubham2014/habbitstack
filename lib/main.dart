@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'theme/app_theme.dart';
 import 'services/database_service.dart';
 import 'services/user_service.dart';
@@ -13,7 +14,12 @@ void main() async {
   // Ensure default user exists
   await UserService().getCurrentUser();
 
-  runApp(const MyApp());
+  runApp(
+    // Wrap entire app with ProviderScope for Riverpod
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
