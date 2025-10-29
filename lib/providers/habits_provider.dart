@@ -91,11 +91,16 @@ class HabitsNotifier extends StateNotifier<AsyncValue<List<Habit>>> {
 // Habits State Provider
 final habitsNotifierProvider = StateNotifierProvider<HabitsNotifier, AsyncValue<List<Habit>>>((ref) {
   final habitService = ref.read(habitServiceProvider);
+
+  // Watch the user provider to get userId
   final userAsync = ref.watch(userNotifierProvider);
 
-  return userAsync.when(
-    data: (user) => HabitsNotifier(habitService, user?.id ?? 0),
-    loading: () => HabitsNotifier(habitService, 0),
-    error: (_, __) => HabitsNotifier(habitService, 0),
+  // Extract userId from AsyncValue
+  final userId = userAsync.when(
+    data: (user) => user?.id ?? 1, // Default to user 1 (created during setup)
+    loading: () => 1,
+    error: (_, __) => 1,
   );
+
+  return HabitsNotifier(habitService, userId);
 });

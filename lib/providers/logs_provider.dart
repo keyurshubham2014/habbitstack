@@ -72,13 +72,18 @@ class LogsNotifier extends StateNotifier<AsyncValue<List<DailyLog>>> {
 // Logs State Provider
 final logsNotifierProvider = StateNotifierProvider<LogsNotifier, AsyncValue<List<DailyLog>>>((ref) {
   final logService = ref.read(logServiceProvider);
+
+  // Watch the user provider to get userId
   final userAsync = ref.watch(userNotifierProvider);
 
-  return userAsync.when(
-    data: (user) => LogsNotifier(logService, user?.id ?? 0),
-    loading: () => LogsNotifier(logService, 0),
-    error: (_, __) => LogsNotifier(logService, 0),
+  // Extract userId from AsyncValue
+  final userId = userAsync.when(
+    data: (user) => user?.id ?? 1, // Default to user 1 (created during setup)
+    loading: () => 1,
+    error: (_, __) => 1,
   );
+
+  return LogsNotifier(logService, userId);
 });
 
 // Provider for logs of a specific habit
