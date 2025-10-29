@@ -13,8 +13,8 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 ## Quick Stats
 
 - **Total Tasks**: 25
-- **Completed**: 0
-- **In Progress**: 1 (Task 01 - pending Flutter installation)
+- **Completed**: 1 ✅
+- **In Progress**: 0
 - **Blocked**: 0
 - **Not Started**: 24
 
@@ -24,11 +24,11 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 
 ### Week 1-2: Project Setup
 **Status**: IN PROGRESS
-**Progress**: 0.5/5 tasks (Task 01 partially complete)
+**Progress**: 1/5 tasks complete
 
 | Task File | Description | Status | Priority |
 |-----------|-------------|--------|----------|
-| `01_project_initialization.md` | Initialize Flutter project with dependencies | IN PROGRESS (Flutter installation pending) | HIGH |
+| `01_project_initialization.md` | Initialize Flutter project with dependencies | ✅ DONE | HIGH |
 | `02_design_system_setup.md` | Create theme, colors, typography | TODO | HIGH |
 | `03_database_schema.md` | Set up SQLite with schema | TODO | HIGH |
 | `04_bottom_navigation.md` | Implement main navigation structure | TODO | HIGH |
