@@ -13,10 +13,10 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 ## Quick Stats
 
 - **Total Tasks**: 25
-- **Completed**: 3 ✅
+- **Completed**: 4 ✅
 - **In Progress**: 0
 - **Blocked**: 0
-- **Not Started**: 22
+- **Not Started**: 21
 
 ---
 
@@ -24,14 +24,14 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 
 ### Week 1-2: Project Setup
 **Status**: IN PROGRESS
-**Progress**: 3/5 tasks complete (60%)
+**Progress**: 4/5 tasks complete (80%)
 
 | Task File | Description | Status | Priority |
 |-----------|-------------|--------|----------|
 | `01_project_initialization.md` | Initialize Flutter project with dependencies | ✅ DONE | HIGH |
 | `02_design_system_setup.md` | Create theme, colors, typography | ✅ DONE | HIGH |
 | `03_database_schema.md` | Set up SQLite with schema | ✅ DONE | HIGH |
-| `04_bottom_navigation.md` | Implement main navigation structure | TODO | HIGH |
+| `04_bottom_navigation.md` | Implement main navigation structure | ✅ DONE | HIGH |
 | `05_state_management.md` | Set up Riverpod providers | TODO | HIGH |
 
 ### Week 3-4: Core Features
@@ -102,10 +102,10 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 2. [x] Set up all dependencies in pubspec.yaml
 3. [x] Create design system (colors, typography, theme)
 4. [x] Set up SQLite database with core schema
-5. [ ] Implement bottom navigation with 5 tabs
+5. [x] Implement bottom navigation with 5 tabs
 
 #### Nice to Have:
-- [ ] Create placeholder screens for all tabs
+- [x] Create placeholder screens for all tabs
 - [ ] Add basic animations to navigation
 - [ ] Set up CI/CD pipeline (GitHub Actions)
 
