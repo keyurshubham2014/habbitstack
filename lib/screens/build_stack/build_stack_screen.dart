@@ -34,10 +34,11 @@ class BuildStackScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'build_stack_fab',
         onPressed: () {
           // Will implement in Task 09
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

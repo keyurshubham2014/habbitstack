@@ -34,10 +34,11 @@ class TodaysLogScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'todays_log_fab',
         onPressed: () {
           // Will implement in Task 06
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
