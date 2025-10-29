@@ -6,8 +6,27 @@ import 'widgets/buttons/primary_button.dart';
 import 'widgets/buttons/secondary_button.dart';
 import 'widgets/cards/base_card.dart';
 import 'widgets/inputs/text_input_field.dart';
+import 'services/database_service.dart';
+import 'services/user_service.dart';
+import 'utils/database_test_helper.dart';
 
-void main() {
+void main() async {
+  // Ensure Flutter is initialized
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize database
+  await DatabaseService.instance.database;
+  print('✅ Database initialized');
+
+  // Verify schema
+  await DatabaseTestHelper.printAllTables();
+  await DatabaseTestHelper.verifySchema();
+
+  // Ensure default user exists
+  final userService = UserService();
+  final user = await userService.getCurrentUser();
+  print('✅ Current user: ${user?.name} (ID: ${user?.id})');
+
   runApp(const StackHabitApp());
 }
 
