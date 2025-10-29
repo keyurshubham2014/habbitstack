@@ -13,10 +13,10 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 ## Quick Stats
 
 - **Total Tasks**: 25
-- **Completed**: 1 ✅
+- **Completed**: 2 ✅
 - **In Progress**: 0
 - **Blocked**: 0
-- **Not Started**: 24
+- **Not Started**: 23
 
 ---
 
@@ -24,12 +24,12 @@ This file tracks the overall progress of the StackHabit Flutter app development.
 
 ### Week 1-2: Project Setup
 **Status**: IN PROGRESS
-**Progress**: 1/5 tasks complete
+**Progress**: 2/5 tasks complete (40%)
 
 | Task File | Description | Status | Priority |
 |-----------|-------------|--------|----------|
 | `01_project_initialization.md` | Initialize Flutter project with dependencies | ✅ DONE | HIGH |
-| `02_design_system_setup.md` | Create theme, colors, typography | TODO | HIGH |
+| `02_design_system_setup.md` | Create theme, colors, typography | ✅ DONE | HIGH |
 | `03_database_schema.md` | Set up SQLite with schema | TODO | HIGH |
 | `04_bottom_navigation.md` | Implement main navigation structure | TODO | HIGH |
 | `05_state_management.md` | Set up Riverpod providers | TODO | HIGH |
