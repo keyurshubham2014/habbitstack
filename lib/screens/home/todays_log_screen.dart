@@ -10,6 +10,7 @@ import '../../widgets/cards/log_entry_card.dart';
 import '../../widgets/cards/bounce_back_card.dart';
 import '../../widgets/common/notes_search.dart';
 import 'add_log_sheet.dart';
+import 'calendar_view_screen.dart';
 
 class TodaysLogScreen extends ConsumerStatefulWidget {
   const TodaysLogScreen({super.key});
@@ -44,7 +45,12 @@ class _TodaysLogScreenState extends ConsumerState<TodaysLogScreen> {
           IconButton(
             icon: const Icon(Icons.calendar_today, color: AppColors.primaryText),
             onPressed: () {
-              // TODO: Navigate to calendar view
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CalendarViewScreen(),
+                ),
+              );
             },
           ),
         ],

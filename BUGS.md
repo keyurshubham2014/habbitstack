@@ -1,6 +1,6 @@
 # Bug Tracking for StackHabit MVP
 
-**Last Updated**: 2025-11-05
+**Last Updated**: 2025-11-06
 **Phase**: Pre-Launch Testing
 **Version**: 1.0.0-mvp
 
@@ -32,6 +32,8 @@
 | BUG-003 | P0 | Notifications | Daily reminder still not firing (permission + scheduling issues) | 2025-11-05 | Added permission_handler, proper permission flow, and debug logging |
 | BUG-004 | P1 | App Launch | No permission request dialog - permissions not requested properly | 2025-11-05 | Implemented PermissionService with just-in-time permission requests |
 | BUG-005 | P2 | Settings | "Habit Reminders" vs "Daily Reminder" confusing UX | 2025-11-05 | Removed "Habit Reminders" section, kept only unified "Daily Reminder" |
+| BUG-006 | P1 | Today's Log | Calendar button in app bar does nothing - navigation not implemented | 2025-11-06 | Created CalendarViewScreen with 90-day heatmap, stats, and day details |
+| BUG-007 | P2 | Settings | Profile menu item does nothing - screen not created/implemented | 2025-11-06 | Created ProfileScreen with user stats, edit functionality, and activity summary |
 
 ### Fix Details
 
@@ -77,6 +79,130 @@ The Daily Reminder feature wasn't actually implemented. The notification setting
 2. Enable "Daily Reminder" toggle in the highlighted card at top
 3. Tap "Reminder Time" to choose your preferred time (default: 8:00 PM)
 4. Notification will fire daily with message: "📝 Time to Log Your Day"
+
+---
+
+#### BUG-006: Calendar View Implemented ✅
+**Fixed**: 2025-11-06
+**Priority**: P1 (High)
+
+**Issue**:
+The calendar icon button in the app bar of Today's Log screen did nothing when tapped. Expected behavior was to show a calendar heatmap view of activity history.
+
+**Root Cause**:
+- Navigation logic not implemented
+- CalendarHeatmap widget existed but wasn't connected to the button
+- No screen/dialog created to display the calendar view
+
+**Solution**:
+Created comprehensive calendar view with the following features:
+
+1. **New Screen**: [calendar_view_screen.dart](lib/screens/home/calendar_view_screen.dart)
+   - Full-screen calendar view with 90-day activity heatmap
+   - Summary statistics card showing:
+     - Total logs in 90 days
+     - Active days count
+     - Average logs per day
+   - Activity intensity breakdown
+   - Interactive calendar - tap any day to see details
+
+2. **Navigation**: Updated [todays_log_screen.dart:45-55](lib/screens/home/todays_log_screen.dart#L45-L55)
+   - Calendar button now navigates to CalendarViewScreen
+   - Clean modal presentation
+
+3. **Day Details Modal**:
+   - Shows all activities logged on selected day
+   - Fetches habit names dynamically from database
+   - Displays notes for each activity
+   - Graceful handling for days with no logs
+
+**Features**:
+- 90-day scrollable heatmap with color intensity
+- Visual legend (Less → More)
+- Today's date highlighted with border
+- Stats: Total logs, Active days, Average per day
+- Activity intensity breakdown (Low/Medium/High)
+- Tap any day to see details in bottom sheet
+
+**Files Created**:
+- `lib/screens/home/calendar_view_screen.dart`
+
+**Files Changed**:
+- `lib/screens/home/todays_log_screen.dart`
+
+---
+
+#### BUG-007: Profile Screen Implemented ✅
+**Fixed**: 2025-11-06
+**Priority**: P2 (Medium)
+
+**Issue**:
+The "Profile" menu item in Settings screen did nothing when tapped. Profile screen/functionality had not been created.
+
+**Root Cause**:
+- Profile screen not created
+- No navigation logic implemented
+- Profile features undefined for MVP
+
+**Solution**:
+Created comprehensive profile screen with the following features:
+
+1. **New Screen**: [profile_screen.dart](lib/screens/settings/profile_screen.dart)
+   - Complete user profile management
+   - Real-time statistics from database
+   - Edit functionality with form validation
+   - Beautiful UI with card-based layout
+
+2. **Profile Header**:
+   - Avatar with user's initial
+   - Name and email display
+   - Premium badge (if applicable)
+   - Edit button in app bar
+
+3. **Activity Statistics Card**:
+   - Total activities logged
+   - Habits tracked count
+   - Longest streak (dynamically calculated)
+   - All stats load from providers with loading states
+
+4. **Account Information Card**:
+   - Member since date (human-readable format)
+   - Account type (Free/Premium)
+   - Clean, organized layout
+
+5. **Edit Profile Form**:
+   - Toggle edit mode with app bar button
+   - Form validation (required name, optional email)
+   - Email format validation
+   - Save/Cancel actions
+   - Success/error feedback
+
+6. **Navigation**: Updated [settings_screen.dart:19-29](lib/screens/settings/settings_screen.dart#L19-L29)
+   - Profile menu item now navigates to ProfileScreen
+
+**Features Implemented**:
+✅ User avatar with initial
+✅ Display name and email
+✅ Member since date (human-readable)
+✅ Total habits tracked
+✅ Total activities logged
+✅ Longest streak achieved
+✅ Edit profile functionality
+✅ Form validation
+✅ Premium status badge
+✅ Error handling
+
+**Files Created**:
+- `lib/screens/settings/profile_screen.dart`
+
+**Files Changed**:
+- `lib/screens/settings/settings_screen.dart`
+
+**Future Enhancements** (Phase 2):
+- Photo upload for avatar
+- Sign out functionality
+- Account deletion
+- Export data option
 
 ---
 

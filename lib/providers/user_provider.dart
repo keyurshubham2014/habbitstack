@@ -53,6 +53,10 @@ class UserNotifier extends StateNotifier<AsyncValue<User?>> {
   Future<void> refresh() async {
     await _loadUser();
   }
+
+  Future<void> clearUser() async {
+    state = const AsyncValue.data(null);
+  }
 }
 
 // User State Provider
