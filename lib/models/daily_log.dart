@@ -6,6 +6,7 @@ class DailyLog {
   final String? notes;
   final String? sentiment; // 'happy', 'neutral', 'struggled'
   final String? voiceNotePath;
+  final List<String>? tags; // Hashtags extracted from notes
   final DateTime createdAt;
 
   DailyLog({
@@ -16,6 +17,7 @@ class DailyLog {
     this.notes,
     this.sentiment,
     this.voiceNotePath,
+    this.tags,
     required this.createdAt,
   });
 
@@ -28,6 +30,7 @@ class DailyLog {
       'notes': notes,
       'sentiment': sentiment,
       'voice_note_path': voiceNotePath,
+      'tags': tags != null ? tags!.join(',') : null,
       'created_at': createdAt.toIso8601String(),
     };
   }
@@ -41,6 +44,9 @@ class DailyLog {
       notes: map['notes'] as String?,
       sentiment: map['sentiment'] as String?,
       voiceNotePath: map['voice_note_path'] as String?,
+      tags: map['tags'] != null && (map['tags'] as String).isNotEmpty
+          ? (map['tags'] as String).split(',')
+          : null,
       createdAt: DateTime.parse(map['created_at'] as String),
     );
   }
@@ -53,6 +59,7 @@ class DailyLog {
     String? notes,
     String? sentiment,
     String? voiceNotePath,
+    List<String>? tags,
     DateTime? createdAt,
   }) {
     return DailyLog(
@@ -63,7 +70,17 @@ class DailyLog {
       notes: notes ?? this.notes,
       sentiment: sentiment ?? this.sentiment,
       voiceNotePath: voiceNotePath ?? this.voiceNotePath,
+      tags: tags ?? this.tags,
       createdAt: createdAt ?? this.createdAt,
     );
+  }
+
+  /// Helper method to extract tags from notes
+  static List<String> extractTags(String? notes) {
+    if (notes == null || notes.isEmpty) return [];
+
+    final regex = RegExp(r'#(\w+)');
+    final matches = regex.allMatches(notes);
+    return matches.map((m) => m.group(1)!.toLowerCase()).toSet().toList();
   }
 }

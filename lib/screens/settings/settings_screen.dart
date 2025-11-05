@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../theme/app_text_styles.dart';
 import '../../theme/app_colors.dart';
 import '../test_providers_screen.dart';
+import 'notification_settings_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -25,7 +26,12 @@ class SettingsScreen extends StatelessWidget {
             leading: Icon(Icons.notifications, color: AppColors.deepBlue),
             title: Text('Notifications', style: AppTextStyles.body()),
             trailing: Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationSettingsScreen()),
+              );
+            },
           ),
           Divider(),
           ListTile(
@@ -49,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => TestProvidersScreen()),
+                MaterialPageRoute(builder: (context) => const TestProvidersScreen()),
               );
             },
           ),

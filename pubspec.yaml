@@ -29,8 +29,10 @@ dependencies:
   # Features
   speech_to_text: ^7.0.0
   flutter_local_notifications: ^18.0.1
+  timezone: ^0.9.4
   share_plus: ^12.0.1
   url_launcher: ^6.3.0
+  permission_handler: ^11.3.1
 
   # API Integration
   http: ^1.2.1
@@ -40,6 +42,12 @@ dependencies:
   intl: ^0.19.0
   uuid: ^4.4.0
 
+  # Cloud & Auth
+  supabase_flutter: ^2.3.0
+  flutter_secure_storage: ^9.0.0
+  connectivity_plus: ^5.0.2
+  flutter_dotenv: ^5.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,7 +56,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # Uncomment to add assets
-  # assets:
-  #   - assets/icons/
-  #   - assets/images/
+  # Assets
+  assets:
+    - .env
