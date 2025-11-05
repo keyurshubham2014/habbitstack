@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_text_styles.dart';
 import '../../providers/logs_provider.dart';
+import '../../models/habit.dart';
 import '../../providers/habits_provider.dart';
 import '../../widgets/common/calendar_heatmap.dart';
 import '../../models/daily_log.dart';
@@ -307,7 +308,8 @@ class CalendarViewScreen extends ConsumerWidget {
                 ...dayLogs.map((log) => FutureBuilder(
                   future: habitService.getHabit(log.habitId),
                   builder: (context, snapshot) {
-                    final habitName = snapshot.data?.name ?? 'Activity';
+                    final habit = snapshot.data as Habit?;
+                    final habitName = habit?.name ?? 'Activity';
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),

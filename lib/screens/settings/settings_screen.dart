@@ -6,6 +6,7 @@ import '../../theme/app_text_styles.dart';
 import '../../theme/app_colors.dart';
 import '../../services/auth_service.dart';
 import '../../providers/user_provider.dart';
+import '../../providers/auth_provider.dart';
 import '../test_providers_screen.dart';
 import 'notification_settings_screen.dart';
 import 'profile_screen.dart';
@@ -13,11 +14,6 @@ import 'profile_screen.dart';
 // Provider for app version info
 final appVersionProvider = FutureProvider<PackageInfo>((ref) async {
   return await PackageInfo.fromPlatform();
-});
-
-// Provider for auth service
-final authServiceProvider = Provider<AuthService>((ref) {
-  return AuthService();
 });
 
 class SettingsScreen extends ConsumerWidget {
@@ -245,22 +241,28 @@ class SettingsScreen extends ConsumerWidget {
       // Clear user state
       await ref.read(userNotifierProvider.notifier).clearUser();
 
-      // Dismiss loading snackbar
+      // Invalidate auth state provider to force refresh
+      ref.invalidate(authStateProvider);
+
+      // Dismiss loading snackbar and show success
       if (context.mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Successfully logged out'),
             backgroundColor: AppColors.successGreen,
-            duration: Duration(seconds: 2),
+            duration: Duration(seconds: 1),
           ),
         );
 
-        // Navigate to main/login screen
-        // Note: Adjust this navigation based on your app's auth flow
-        Navigator.of(context).popUntil((route) => route.isFirst);
+        // Navigate after a brief delay to allow auth state to propagate
+        // The auth state change will trigger _AuthChecker to show WelcomeScreen
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (context.mounted) {
+            Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil('/', (route) => false);
+          }
+        });
       }
     } catch (e) {
       // Dismiss loading snackbar
@@ -413,21 +415,28 @@ class SettingsScreen extends ConsumerWidget {
       // Clear all app state
       await ref.read(userNotifierProvider.notifier).clearUser();
 
-      // Dismiss loading snackbar
+      // Invalidate auth state provider to force refresh
+      ref.invalidate(authStateProvider);
+
+      // Dismiss loading snackbar and show success
       if (context.mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Account deleted successfully'),
             backgroundColor: AppColors.successGreen,
-            duration: Duration(seconds: 2),
+            duration: Duration(seconds: 1),
           ),
         );
 
-        // Navigate to main/login screen
-        Navigator.of(context).popUntil((route) => route.isFirst);
+        // Navigate after a brief delay to allow auth state to propagate
+        // The auth state change will trigger _AuthChecker to show WelcomeScreen
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (context.mounted) {
+            Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil('/', (route) => false);
+          }
+        });
       }
     } catch (e) {
       // Dismiss loading snackbar

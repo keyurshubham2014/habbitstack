@@ -1,8 +1,12 @@
+import 'package:flutter/material.dart' show debugPrint;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'supabase_service.dart';
+import 'cloud_user_service.dart';
+import '../models/user.dart' as models;
 
 class AuthService {
   final SupabaseClient _supabase = SupabaseService.instance.client;
+  final CloudUserService _cloudUserService = CloudUserService();
 
   /// Check if user is logged in
   User? get currentUser => _supabase.auth.currentUser;
@@ -31,6 +35,11 @@ class AuthService {
         throw Exception('Failed to create account. Please try again.');
       }
 
+      // Create user profile in Supabase users table
+      if (response.user != null) {
+        await _ensureUserProfile(response.user!, name);
+      }
+
       return response;
     } on AuthException catch (e) {
       throw _handleAuthException(e);
@@ -52,6 +61,12 @@ class AuthService {
 
       if (response.user == null) {
         throw Exception('Login failed. Please check your credentials.');
+      }
+
+      // Ensure user profile exists in Supabase users table
+      if (response.user != null) {
+        final name = response.user!.userMetadata?['name'] as String? ?? 'User';
+        await _ensureUserProfile(response.user!, name);
       }
 
       return response;
@@ -174,6 +189,32 @@ class AuthService {
       throw _handleAuthException(e);
     } catch (e) {
       throw Exception('Failed to resend verification email: $e');
+    }
+  }
+
+  /// Ensure user profile exists in Supabase users table
+  /// This creates or updates the user profile after signup/login
+  Future<void> _ensureUserProfile(User user, String name) async {
+    try {
+      // Check if user profile already exists
+      final exists = await _cloudUserService.userExists(user.id);
+
+      if (!exists) {
+        // Create user profile
+        await _cloudUserService.upsertUser(
+          models.User(
+            name: name,
+            email: user.email ?? '',
+            createdAt: DateTime.now(),
+            premiumStatus: false,
+          ),
+          user.id,
+        );
+      }
+    } catch (e) {
+      // Log error but don't throw - user can still use the app
+      // The profile will be created on next sync attempt
+      debugPrint('Warning: Could not create user profile: $e');
     }
   }
 
